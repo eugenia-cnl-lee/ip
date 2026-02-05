@@ -1,10 +1,18 @@
-public class Task {
+/** Task stores single data **/
 
-    public Task(String input) {
-        task = input;
+public class Task {
+    private final String description;
+
+    public Task(String description) {
+        this.description = description;
     }
 
-    public Task getTask() {
-        return task;
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public String toString() {
+        return description;
     }
 }

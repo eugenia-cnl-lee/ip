@@ -1,15 +1,19 @@
+/** Athena controls the command flow **/
+
 import java.util.Scanner;
 
 public class Athena {
 
     private final Ui ui;
     private final Scanner scanner;
+    private final TaskList tasks;
 
     /** Constructs an Athena chatbot instance
-    Initialises the UI and input reader **/
+    Initialise the UI and input reader **/
     public Athena() {
         this.ui = new Ui();
         this.scanner = new Scanner(System.in);
+        this.tasks = new TaskList();
     }
 
     /** Runs the main chatbot loop:
@@ -18,19 +22,19 @@ public class Athena {
         ui.showGreeting();
 
         while (true) {
-            String input = scanner.nextLine();
+            String input = scanner.nextLine().trim();
 
             if (input.equals("bye")) {
                 ui.showExit();
                 break;
-            }
 
-            else if (input.equals("list")) {
+            } else if (input.equals("list")) {
                 ui.showTaskList(tasks);
-            }
 
-            else {
-                ui.showEcho(input);
+            } else {
+                Task task = new Task(input);
+                tasks.addTask(task);
+                ui.showTaskAdded(task, tasks.getSize());
             }
         }
     }
