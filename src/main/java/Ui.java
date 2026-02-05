@@ -18,6 +18,21 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    /** Prints a task element in task list back to the console **/
+    public void showEcho(Task task) {
+        System.out.println(task);
+    }
+
+    /** Prints all the task elements in the task list **/
+    public void showTaskList(TaskList tasks) {
+        for (int i = 1; i = tasks.getSize(); i++) {
+            int index = i - 1;
+            Task task = tasks.getTask(index);
+            System.out.println(i + ". " + Ui.showEcho(task));
+        }
+        System.out.println(LINE);
+    }
+
     /** Prints the goodbye message when the user exits the program **/
     public void showExit() {
         System.out.println(LINE);

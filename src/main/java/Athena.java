@@ -25,7 +25,13 @@ public class Athena {
                 break;
             }
 
-            ui.showEcho(input);
+            else if (input.equals("list")) {
+                ui.showTaskList(tasks);
+            }
+
+            else {
+                ui.showEcho(input);
+            }
         }
     }
 
