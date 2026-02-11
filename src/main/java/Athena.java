@@ -22,7 +22,7 @@ public class Athena {
         if (inputParts.length != 2) {
             return -1;
         }
-        return Integer.parseInt(inputParts[1]);
+        return Integer.parseInt(inputParts[1]) - 1;
     }
 
     /** Runs the main chatbot loop:
@@ -94,7 +94,7 @@ public class Athena {
                     break;
                 }
                 String[] timeParts = eventParts[1].split("/to ", 2);
-                if (eventParts.length < 2) {
+                if (timeParts.length < 2) {
                     ui.askEventTime();
                     break;
                 }
