@@ -16,23 +16,45 @@ public class Athena {
         this.tasks = new TaskList();
     }
 
+    /** Helper function:
+    extracts the index from user input **/
+    private static int extractIndex(String line) {
+        String[] parts = line.split(" ");
+        if (parts.length < 2) {
+            return -1;
+        }
+        return Integer.parseInt(parts[1]) - 1;
+    }
+
     /** Runs the main chatbot loop:
-    Reads user input, echoes it, and exits when user enters "bye" **/
+    Reads user input line, echoes it, and exits when user enters "bye" **/
     public void run() {
         ui.showGreeting();
 
         while (true) {
-            String input = scanner.nextLine().trim();
+            String line = scanner.nextLine().trim();
 
-            if (input.equals("bye")) {
+            if (line.equalsIgnoreCase("bye")) {
                 ui.showExit();
                 break;
 
-            } else if (input.equals("list")) {
+            } else if (line.equalsIgnoreCase("list")) {
                 ui.showTaskList(tasks);
 
+            } else if (line.toLowerCase().startsWith("mark")) {
+                int index = extractIndex(line);
+                Task task = tasks.getTask(index);
+                task.markAsDone();
+                ui.showTaskMarkedAsDone(task);
+                
+            } else if (line.toLowerCase().startsWith("unmark")) {
+                int index = extractIndex(line);
+                Task task = tasks.getTask(index);
+                task.markAsUndone();
+                ui.showTaskMarkedAsUndone(task);
+
             } else {
-                Task task = new Task(input);
+                Task task = new Task(line);
                 tasks.addTask(task);
                 ui.showTaskAdded(task, tasks.getSize());
             }

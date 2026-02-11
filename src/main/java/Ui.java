@@ -41,4 +41,18 @@ public class Ui {
         }
         printLine();
     }
+
+    /** Prints the task which has been marked as done **/
+    public void showTaskMarkedAsDone(Task task) {
+        System.out.println("Well done scholar. I've marked this quest as done:");
+        System.out.println(task.toString());
+        printLine();
+    }
+
+    /** Prints the task which has been unmarked hence not done **/
+    public void showTaskMarkedAsUndone(Task task) {
+        System.out.println("You incompetent fool. This quest has now been marked as undone:");
+        System.out.println(task.toString());
+        printLine();
+    }
 }
