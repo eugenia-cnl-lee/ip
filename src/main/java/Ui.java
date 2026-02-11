@@ -29,7 +29,7 @@ public class Ui {
     }
 
     /** Prints the added task back to console **/
-    public void showTaskAdded(Task task, int total) {
+    public void showTaskAdded(Task task) {
         System.out.println("added: " + task.getDescription());
         printLine();
     }

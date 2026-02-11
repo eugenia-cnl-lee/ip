@@ -56,7 +56,7 @@ public class Athena {
             } else {
                 Task task = new Task(line);
                 tasks.addTask(task);
-                ui.showTaskAdded(task, tasks.getSize());
+                ui.showTaskAdded(task);
             }
         }
     }
