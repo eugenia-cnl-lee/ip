@@ -59,21 +59,45 @@ public class Athena {
                 break;
 
             case "todo":
+                if (inputParts.length < 2) {
+                    ui.askTodoDescription();
+                    break;
+                }
                 Task todo = new Todo(inputParts[1]);
                 tasks.addTask(todo);
                 ui.showTaskAdded(todo, tasks);
                 break;
 
             case "deadline":
+                if (inputParts.length < 2) {
+                    ui.askDeadlineDescription();
+                    break;
+                }
                 String[] deadlineParts = inputParts[1].split("/by ", 2);
+                if (deadlineParts.length < 2) {
+                    ui.askDeadlineTime();
+                    break;
+                }
                 Task deadline = new Deadline(deadlineParts[0], deadlineParts[1]);
                 tasks.addTask(deadline);
                 ui.showTaskAdded(deadline, tasks);
                 break;
 
-            case "event" :
+            case "event":
+                if (inputParts.length < 2) {
+                    ui.askEventDescription();
+                    break;
+                }
                 String[] eventParts = inputParts[1].split("/from ", 2);
+                if (eventParts.length < 2) {
+                    ui.askEventTime();
+                    break;
+                }
                 String[] timeParts = eventParts[1].split("/to ", 2);
+                if (eventParts.length < 2) {
+                    ui.askEventTime();
+                    break;
+                }
                 Task event = new Event(eventParts[0], timeParts[0], timeParts[1]);
                 tasks.addTask(event);
                 ui.showTaskAdded(event, tasks);

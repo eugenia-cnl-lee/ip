@@ -60,4 +60,34 @@ public class Ui {
         System.out.println(task.toString());
         printLine();
     }
+
+    /** Error Handling: when user doesn't provide a description for their Todo task **/
+    public void askTodoDescription() {
+        System.out.println("Provide a task description, you fool.");
+        printLine();
+    }
+
+    /** Error Handling: where user doesn't provide a description for their Deadline task **/
+    public void askDeadlineDescription() {
+        System.out.println("Provide a task description and deadline, you fool.");
+        printLine();
+    }
+
+    /** Error Handling: when user wrongfully formats or doesn't provide a deadline time for their Deadline task **/
+    public void askDeadlineTime() {
+        System.out.println("Use the format: deadline <description> /by <time>, you fool.");
+        printLine();
+    }
+
+    /** Error Handling: when user doesn't provide a description for their Event task **/
+    public void askEventDescription() {
+        System.out.println("Provide a task description, start, and end time, you fool.");
+        printLine();
+    }
+
+    /** Error Handling: when user wrongfully formats or doesn't provide a start or end time for their Event task **/
+    public void askEventTime() {
+        System.out.println("Use the format: event <description> /from <start> /to <end>, you fool.");
+        printLine();
+    }
 }
