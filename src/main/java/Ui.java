@@ -5,6 +5,9 @@ public class Ui {
     /** Horizontal line used for formatting output **/
     private static final String LINE = "========================================";
 
+    /** Indent used for formatting output **/
+    private static final String INDENT = "  ";
+
     /** Prints out formatting line **/
     private void printLine() {
         System.out.println(LINE);
@@ -29,8 +32,10 @@ public class Ui {
     }
 
     /** Prints the added task back to console **/
-    public void showTaskAdded(Task task) {
-        System.out.println("added: " + task.getDescription());
+    public void showTaskAdded(Task task, TaskList tasks) {
+        System.out.println("Got it. I've added this task: ");
+        System.out.println(INDENT + task.toString());
+        System.out.println("Now you have " + tasks.getSize() + " tasks in the list.");
         printLine();
     }
 
