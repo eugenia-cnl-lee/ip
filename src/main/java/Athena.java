@@ -104,9 +104,7 @@ public class Athena {
                 break;
 
             default:
-                Task task = new Task(inputLine);
-                tasks.addTask(task);
-                ui.showTaskAdded(task, tasks);
+                ui.unknownCommand();
                 break;
             }
         }

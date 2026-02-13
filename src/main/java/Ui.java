@@ -101,4 +101,10 @@ public class Ui {
         System.out.println("Use the format: event <description> /from <start> /to <end>, you fool.");
         printLine();
     }
+
+    public void unknownCommand() {
+        printLine();
+        System.out.println("You speak of nonsense, you fool. ");
+        printLine();
+    }
 }
