@@ -46,7 +46,7 @@ public class Ui {
     public void showTaskList(TaskList tasks) {
         printLine();
         for (int i = 0; i < tasks.getSize(); i++) {
-            System.out.println((i + 1) + ". " + tasks.getTask(i));
+            System.out.println((i + 1) + ". " + tasks.getTaskUnsafe(i));
         }
         printLine();
     }
@@ -123,5 +123,11 @@ public class Ui {
         printLine();
     }
 
+    /** Error Handling: general error message is thrown **/
+    public void showError(String message) {
+        printLine();
+        System.out.println(message);
+        printLine();
+    }
 
 }
