@@ -1,12 +1,13 @@
-/** TaskList owns the collection **/
-/** TaskList THROWS **/
+package athena;
+/** athena.TaskList owns the collection **/
+/** athena.TaskList THROWS **/
 
 import java.util.ArrayList;
 
 public class TaskList {
 
     /** Define tasks variable
-     * tasks is a ArrayList consisting of only Task-typed elements **/
+     * tasks is a ArrayList consisting of only athena.Task-typed elements **/
     private final ArrayList<Task> tasks;
 
     /** Constructor for a task list **/

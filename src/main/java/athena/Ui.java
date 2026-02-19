@@ -1,4 +1,6 @@
-/** Ui prints output **/
+package athena;
+
+/** athena.Ui prints output **/
 
 public class Ui {
 
@@ -15,7 +17,7 @@ public class Ui {
 
     /** Prints the welcome message when the user starts the program **/
     public void showGreeting() {
-        System.out.println("Hello wisdom-seeker! I am Athena, your personal assistant chatbot.");
+        System.out.println("Hello wisdom-seeker! I am athena.Athena, your personal assistant chatbot.");
         System.out.println("I am named after the Greek goddess of wisdom, as I possess all the worldly knowledge.");
         System.out.println("Thus, I am able to assist you in all ways.");
         System.out.println("What can I do for you, my curious child?");

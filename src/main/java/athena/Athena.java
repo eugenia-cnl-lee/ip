@@ -1,5 +1,6 @@
-/** Athena controls the command flow **/
-/** Athena THROWS **/
+package athena;
+/** athena.Athena controls the command flow **/
+/** athena.Athena THROWS **/
 
 import java.util.Scanner;
 
@@ -9,7 +10,7 @@ public class Athena {
     private final Scanner scanner;
     private final TaskList tasks;
 
-    /** Constructs an Athena chatbot instance
+    /** Constructs an athena.Athena chatbot instance
     Initialise the UI and input reader **/
     public Athena() {
         this.ui = new Ui();
@@ -27,7 +28,7 @@ public class Athena {
         try {
             return Integer.parseInt(s) - 1;
         } catch (NumberFormatException e) {
-            throw new AthenaException("Task number must be an integer, you fool.");
+            throw new AthenaException("athena.Task number must be an integer, you fool.");
         }
     }
 

@@ -1,4 +1,6 @@
-/** Task stores single data **/
+package athena;
+
+/** athena.Task stores single data **/
 
 public class Task {
     protected final String description;
@@ -7,10 +9,6 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-    }
-
-    public String getDescription() {
-        return this.description;
     }
 
     public String getStatusIcon() {
