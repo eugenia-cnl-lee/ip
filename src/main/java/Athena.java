@@ -31,7 +31,6 @@ public class Athena {
         }
     }
 
-
     private void processCommand(String inputLine) throws AthenaException {
         String[] inputParts = inputLine.split(" ", 2);
         String command = inputParts[0].toLowerCase();
@@ -105,19 +104,15 @@ public class Athena {
         }
     }
 
-
     /** run() CATCHES **/
     public void run() {
         ui.showGreeting();
-
         while (true) {
             String inputLine = scanner.nextLine().trim();
-
             if (inputLine.isEmpty()) {
                 ui.emptyCommand();
                 continue;
             }
-
             try {
                 processCommand(inputLine);
             } catch (AthenaException e) {
@@ -125,7 +120,6 @@ public class Athena {
             }
         }
     }
-
 
     /** Program entry point **/
     public static void main(String[] args) {
