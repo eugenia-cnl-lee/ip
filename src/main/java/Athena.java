@@ -27,7 +27,7 @@ public class Athena {
             return -1;
         }
         try {
-            return Integer.parseInt(inputParts[1]) - 1;
+            return Integer.parseInt(s) - 1;
         } catch (NumberFormatException e) {
             return -1;
         }
