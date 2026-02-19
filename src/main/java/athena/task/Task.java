@@ -1,6 +1,6 @@
-package athena;
+package athena.task;
 
-/** athena.Task stores single data **/
+/** athena.task.Task stores single data **/
 
 public class Task {
     protected final String description;
