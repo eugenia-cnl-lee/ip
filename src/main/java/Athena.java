@@ -73,7 +73,7 @@ public class Athena {
                     ui.askDeadlineDescription();
                     break;
                 }
-                String[] deadlineParts = inputParts[1].split("/by ", 2);
+                String[] deadlineParts = inputParts[1].split("by ", 2);
                 if (deadlineParts.length < 2) {
                     ui.askDeadlineTime();
                     break;
@@ -88,12 +88,12 @@ public class Athena {
                     ui.askEventDescription();
                     break;
                 }
-                String[] eventParts = inputParts[1].split("/from ", 2);
+                String[] eventParts = inputParts[1].split("from ", 2);
                 if (eventParts.length < 2) {
                     ui.askEventTime();
                     break;
                 }
-                String[] timeParts = eventParts[1].split("/to ", 2);
+                String[] timeParts = eventParts[1].split("to ", 2);
                 if (timeParts.length < 2) {
                     ui.askEventTime();
                     break;
