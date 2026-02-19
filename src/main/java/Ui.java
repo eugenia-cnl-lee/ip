@@ -84,7 +84,7 @@ public class Ui {
     /** Error Handling: when user wrongfully formats or doesn't provide a deadline time for their Deadline task **/
     public void askDeadlineTime() {
         printLine();
-        System.out.println("Use the format: deadline <description> /by <time>, you fool.");
+        System.out.println("Use the format: deadline <description> by <time>, you fool.");
         printLine();
     }
 
@@ -98,13 +98,30 @@ public class Ui {
     /** Error Handling: when user wrongfully formats or doesn't provide a start or end time for their Event task **/
     public void askEventTime() {
         printLine();
-        System.out.println("Use the format: event <description> /from <start> /to <end>, you fool.");
+        System.out.println("Use the format: event <description> from <start> to <end>, you fool.");
         printLine();
     }
 
+    /** Error Handling: when user inputs an unknown command **/
     public void unknownCommand() {
         printLine();
-        System.out.println("You speak of nonsense, you fool. ");
+        System.out.println("You speak of nonsense, you fool.");
         printLine();
     }
+
+    /** Error Handling: when user does not input anything **/
+    public void emptyCommand() {
+        printLine();
+        System.out.println("Are you mute? Speak up.");
+        printLine();
+    }
+
+    /** Error Handling: when user inputs an invalid index **/
+    public void invalidTaskNumber() {
+        printLine();
+        System.out.println("The task number is invalid, you fool. Is your head just there for decoration?");
+        printLine();
+    }
+
+
 }

@@ -22,7 +22,15 @@ public class Athena {
         if (inputParts.length != 2) {
             return -1;
         }
-        return Integer.parseInt(inputParts[1]) - 1;
+        String s = inputParts[1].trim();
+        if (s.isEmpty()) {
+            return -1;
+        }
+        try {
+            return Integer.parseInt(inputParts[1]) - 1;
+        } catch (NumberFormatException e) {
+            return -1;
+        }
     }
 
     /** Runs the main chatbot loop:
@@ -32,6 +40,12 @@ public class Athena {
 
         while (true) {
             String inputLine = scanner.nextLine().trim();
+
+            if (inputLine.isEmpty()) {
+                ui.emptyCommand();
+                continue;
+            }
+
             String[] inputParts = inputLine.split(" ", 2);
             String command = inputParts[0].toLowerCase();
 
@@ -46,6 +60,10 @@ public class Athena {
 
             case "mark":
                 int markedIndex = extractIndex(inputParts);
+                if (markedIndex < 0 || markedIndex >= tasks.getSize()) {
+                    ui.invalidTaskNumber();
+                    break;
+                }
                 Task markedTask = tasks.getTask(markedIndex);
                 markedTask.markAsDone();
                 ui.showTaskMarkedAsDone(markedTask);
@@ -53,13 +71,17 @@ public class Athena {
 
             case "unmark":
                 int unmarkedIndex = extractIndex(inputParts);
+                if (unmarkedIndex < 0 || unmarkedIndex >= tasks.getSize()) {
+                    ui.invalidTaskNumber();
+                    break;
+                }
                 Task unmarkedTask = tasks.getTask(unmarkedIndex);
                 unmarkedTask.markAsUndone();
                 ui.showTaskMarkedAsUndone(unmarkedTask);
                 break;
 
             case "todo":
-                if (inputParts.length < 2) {
+                if (inputParts.length < 2 || inputParts[1].trim().isEmpty()) {
                     ui.askTodoDescription();
                     break;
                 }
@@ -69,12 +91,12 @@ public class Athena {
                 break;
 
             case "deadline":
-                if (inputParts.length < 2) {
+                if (inputParts.length < 2 || inputParts[1].trim().isEmpty()) {
                     ui.askDeadlineDescription();
                     break;
                 }
                 String[] deadlineParts = inputParts[1].split("by ", 2);
-                if (deadlineParts.length < 2) {
+                if (deadlineParts.length < 2 || deadlineParts[1].trim().isEmpty()) {
                     ui.askDeadlineTime();
                     break;
                 }
@@ -84,17 +106,17 @@ public class Athena {
                 break;
 
             case "event":
-                if (inputParts.length < 2) {
+                if (inputParts.length < 2 || inputParts[1].trim().isEmpty()) {
                     ui.askEventDescription();
                     break;
                 }
                 String[] eventParts = inputParts[1].split("from ", 2);
-                if (eventParts.length < 2) {
+                if (eventParts.length < 2 || eventParts[1].trim().isEmpty()) {
                     ui.askEventTime();
                     break;
                 }
                 String[] timeParts = eventParts[1].split("to ", 2);
-                if (timeParts.length < 2) {
+                if (timeParts.length < 2 || timeParts[1].trim().isEmpty()) {
                     ui.askEventTime();
                     break;
                 }
