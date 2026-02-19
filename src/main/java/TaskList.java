@@ -1,4 +1,5 @@
 /** TaskList owns the collection **/
+/** TaskList THROWS **/
 
 import java.util.ArrayList;
 
@@ -24,7 +25,15 @@ public class TaskList {
     }
 
     /** Getters for a task element of the given index **/
-    public Task getTask(int index) {
+    public Task getTask(int index) throws AthenaException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new AthenaException("The task number is invalid, you fool. Is your head just there for decoration?");
+        }
+        return tasks.get(index);
+    }
+
+    /** Non-throwing accessor for listing **/
+    public Task getTaskUnsafe(int index) {
         return tasks.get(index);
     }
 }
