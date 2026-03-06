@@ -10,11 +10,14 @@ import athena.task.Task;
 import athena.task.TaskList;
 import athena.task.Todo;
 import athena.ui.Ui;
+import athena.data.Storage;
+import athena.command.AthenaException;
 
 public class Athena {
 
     private final Ui ui;
     private final Scanner scanner;
+    private final Storage storage;
     private final TaskList tasks;
 
     /** Constructs an athena.command.Athena chatbot instance
@@ -22,7 +25,17 @@ public class Athena {
     public Athena() {
         this.ui = new Ui();
         this.scanner = new Scanner(System.in);
-        this.tasks = new TaskList();
+        this.storage = new Storage("data/athena.txt", "data");
+
+        TaskList loadedTasks;
+        try {
+            loadedTasks = storage.load();
+        } catch (AthenaException e) {
+            ui.showError("Unable to load saved tasks. Starting with an empty task list instead.");
+            loadedTasks = new TaskList();
+        }
+
+        this.tasks = loadedTasks;
     }
 
     /** Error Handling:
@@ -56,6 +69,7 @@ public class Athena {
             int idx = parseIndex(inputParts);
             Task t = tasks.getTask(idx);
             t.markAsDone();
+            storage.save(tasks);
             ui.showTaskMarkedAsDone(t);
             return;
         }
@@ -64,6 +78,7 @@ public class Athena {
             int idx = parseIndex(inputParts);
             Task t = tasks.getTask(idx);
             t.markAsUndone();
+            storage.save(tasks);
             ui.showTaskMarkedAsUndone(t);
             return;
         }
@@ -82,6 +97,7 @@ public class Athena {
             }
             Task todo = new Todo(inputParts[1].trim());
             tasks.addTask(todo);
+            storage.save(tasks);
             ui.showTaskAdded(todo, tasks);
             return;
 
@@ -95,6 +111,7 @@ public class Athena {
             }
             Task deadline = new Deadline(deadlineParts[0].trim(), deadlineParts[1].trim());
             tasks.addTask(deadline);
+            storage.save(tasks);
             ui.showTaskAdded(deadline, tasks);
             return;
 
@@ -112,6 +129,7 @@ public class Athena {
             }
             Task event = new Event(eventParts[0].trim(), timeParts[0].trim(), timeParts[1].trim());
             tasks.addTask(event);
+            storage.save(tasks);
             ui.showTaskAdded(event, tasks);
             return;
 
