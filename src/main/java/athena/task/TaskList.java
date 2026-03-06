@@ -22,6 +22,9 @@ public class TaskList {
         tasks.add(task);
     }
 
+    /** Method for removing a task object from task list **/
+    public void deleteTask(Task task) { tasks.remove(task); }
+
     /** Getters for size of task list **/
     public int getSize() {
         return tasks.size();

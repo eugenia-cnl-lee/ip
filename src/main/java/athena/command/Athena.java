@@ -68,6 +68,14 @@ public class Athena {
             return;
         }
 
+        case "delete":
+            int idx = parseIndex(inputParts);
+            Task t = tasks.getTask(idx);
+            tasks.deleteTask(t);
+            ui.showTaskDeleted(t, tasks);
+            return;
+
+
         case "todo":
             if (inputParts.length < 2 || inputParts[1].trim().isEmpty()) {
                 throw new AthenaException("Provide a task description, you fool.");
