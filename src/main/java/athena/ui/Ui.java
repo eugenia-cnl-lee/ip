@@ -45,6 +45,15 @@ public class Ui {
         printLine();
     }
 
+    /** Prints the deleted task to console **/
+    public void showTaskDeleted(Task task, TaskList tasks) {
+        printLine();
+        System.out.println("I have removed this task from your to-conquest list:");
+        System.out.println(INDENT + task.toString());
+        System.out.println("You disappoint me. Now you have " + tasks.getSize() + " in the list.");
+        printLine();
+    }
+
     /** Prints all the task elements in the task list **/
     public void showTaskList(TaskList tasks) {
         printLine();
