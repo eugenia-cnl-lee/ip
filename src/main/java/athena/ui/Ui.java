@@ -65,7 +65,7 @@ public class Ui {
     }
 
     /** Prints all the task elements in the task list, with chatbot informing user these are the outputs for the list command **/
-    public void showTaskListWithPrompt(TaskList tasks) {
+    public void showTaskListWithIntro(TaskList tasks) {
         printLine();
         System.out.println("Here are the tasks in your list:");
         showTaskList(tasks);

@@ -75,7 +75,7 @@ public class Athena {
             return;
 
         case "list":
-            ui.showTaskListWithPrompt(tasks);
+            ui.showTaskListWithIntro(tasks);
             return;
 
         case "mark": {
