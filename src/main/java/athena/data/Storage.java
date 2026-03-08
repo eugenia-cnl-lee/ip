@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
-
 import athena.command.AthenaException;
 import athena.task.Deadline;
 import athena.task.Event;
@@ -13,6 +12,10 @@ import athena.task.Todo;
 import athena.task.Task;
 import athena.task.TaskList;
 
+/**
+ * Storage handles loading tasks from the file system
+ * and saving tasks to persistent storage.
+ */
 public class Storage {
     private final String filePath;
     private final String dirPath;
@@ -51,6 +54,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks from the storage file.
+     *
+     * @return TaskList containing tasks loaded from file
+     * @throws AthenaException if loading fails
+     */
     public TaskList load() throws AthenaException {
         TaskList taskList = new TaskList();
 

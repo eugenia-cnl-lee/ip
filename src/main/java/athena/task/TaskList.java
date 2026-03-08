@@ -1,36 +1,67 @@
 package athena.task;
-/** athena.task.TaskList owns the collection **/
-/** athena.task.TaskList THROWS **/
 
 import java.util.ArrayList;
-
 import athena.command.AthenaException;
 
+/**
+ * TaskList manages the collection of tasks in the chatbot.
+ * <p>
+ * It stores tasks in an {@link ArrayList} and provides operations
+ * for adding tasks, deleting tasks, retrieving tasks, and searching
+ * for tasks based on a keyword.
+ * </p>
+ */
 public class TaskList {
 
-    /** Define tasks variable
-     * tasks is a ArrayList consisting of only athena.task.Task-typed elements **/
+    /**
+     * Internal list that stores all tasks currently managed by the application.
+     */
     private final ArrayList<Task> tasks;
 
-    /** Constructor for a task list **/
+    /**
+     * Constructs an empty TaskList.
+     * <p>
+     * Initializes the internal task storage as an empty {@link ArrayList}.
+     * </p>
+     */
     public TaskList() {
         this.tasks = new ArrayList<Task>();
     }
 
-    /** Method for appending a task object to task list **/
+    /**
+     * Adds a task to the task list.
+     *
+     * @param task the task to be added to the list
+     */
     public void addTask(Task task) {
         tasks.add(task);
     }
 
-    /** Method for removing a task object from task list **/
-    public void deleteTask(Task task) { tasks.remove(task); }
+    /**
+     * Removes a task from the task list.
+     *
+     * @param task the task to be removed from the list
+     */
+    public void deleteTask(Task task) {
+        tasks.remove(task);
+    }
 
-    /** Getters for size of task list **/
+    /**
+     * Returns the total number of tasks currently stored in the list.
+     *
+     * @return the number of tasks in the task list
+     */
     public int getSize() {
         return tasks.size();
     }
 
-    /** Getters for a task element of the given index **/
+    /**
+     * Retrieves a task at a specific index from the task list.
+     *
+     * @param index the position of the task in the list (zero-based)
+     * @return the task located at the specified index
+     * @throws AthenaException if the provided index is invalid
+     */
     public Task getTask(int index) throws AthenaException {
         if (index < 0 || index >= tasks.size()) {
             throw new AthenaException("The task number is invalid, you fool. Is your head just there for decoration?");
@@ -38,12 +69,30 @@ public class TaskList {
         return tasks.get(index);
     }
 
-    /** Non-throwing accessor for listing **/
+    /**
+     * Retrieves a task at a specific index without performing validation checks.
+     * <p>
+     * This method assumes the caller already ensures that the index is valid.
+     * It is typically used in internal operations such as listing tasks.
+     * </p>
+     *
+     * @param index the position of the task in the list (zero-based)
+     * @return the task at the specified index
+     */
     public Task getTaskUnsafe(int index) {
         return tasks.get(index);
     }
 
-    /** Method for finding a task objecting from task list **/
+    /**
+     * Searches for tasks that contain a given keyword in their description.
+     * <p>
+     * The search is case-insensitive and matches tasks whose string
+     * representation contains the keyword.
+     * </p>
+     *
+     * @param keyword the keyword used to search for matching tasks
+     * @return a new {@code TaskList} containing all matching tasks
+     */
     public TaskList findTasks(String keyword) {
         TaskList matches = new TaskList();
         for (Task task : tasks) {

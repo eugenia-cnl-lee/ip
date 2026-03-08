@@ -1,20 +1,41 @@
 package athena.parser;
-/** athena.parser.Parser interprets the user input **/
 
 import athena.command.AthenaException;
 
+/**
+ * Parser is responsible for interpreting user input
+ * and extracting the command and its arguments.
+ */
 public class Parser {
 
+    /**
+     * Parses the task index from the user's input.
+     *
+     * @param inputParts array containing the split user input
+     * @return the zero-based index of the task
+     * @throws AthenaException if the task number is missing or not a valid integer
+     */
     public String[] splitInput(String inputLine) {
         return inputLine.split(" ", 2);
     }
 
+    /**
+     * Extracts the command word from the user's input.
+     *
+     * @param inputLine full line entered by the user
+     * @return the command word in lowercase
+     */
     public String parseCommandWord(String inputLine) {
         return splitInput(inputLine)[0].toLowerCase();
     }
 
-    /** Error Handling:
-     parses index from user input **/
+    /**
+     * Parses the task index from the user's input.
+     *
+     * @param inputParts array containing the split user input
+     * @return the zero-based index of the task
+     * @throws AthenaException if the task number is missing or not a valid integer
+     */
     public int parseIndex(String[] inputParts) throws AthenaException {
         if (inputParts.length != 2 || inputParts[1].trim().isEmpty()) {
             throw new AthenaException("Provide a task number, you fool.");
@@ -26,6 +47,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Extracts the description for a todo task.
+     *
+     * @param inputParts array containing the split user input
+     * @return the task description
+     * @throws AthenaException if the description is missing
+     */
     public String parseTodoDescription(String[] inputParts) throws AthenaException {
         if (inputParts.length < 2 || inputParts[1].trim().isEmpty()) {
             throw new AthenaException("Provide a task description, you fool.");
@@ -33,6 +61,13 @@ public class Parser {
         return inputParts[1].trim();
     }
 
+    /**
+     * Parses the description and deadline time from a deadline command.
+     *
+     * @param inputParts array containing the split user input
+     * @return an array containing the task description and deadline time
+     * @throws AthenaException if the command format is invalid
+     */
     public String[] parseDeadlineParts(String[] inputParts) throws AthenaException {
         if (inputParts.length < 2 || inputParts[1].trim().isEmpty()) {
             throw new AthenaException("Provide a task description and deadline, you fool.");
@@ -45,6 +80,13 @@ public class Parser {
         return new String[]{deadlineParts[0].trim(), deadlineParts[1].trim()};
     }
 
+    /**
+     * Parses the description and deadline time from a deadline command.
+     *
+     * @param inputParts array containing the split user input
+     * @return an array containing the task description and deadline time
+     * @throws AthenaException if the command format is invalid
+     */
     public String[] parseEventParts(String[] inputParts) throws AthenaException {
         if (inputParts.length < 2 || inputParts[1].trim().isEmpty()) {
             throw new AthenaException("Provide a task description, start, and end time, you fool.");
@@ -62,6 +104,13 @@ public class Parser {
         return new String[]{eventParts[0].trim(), timeParts[0].trim(), timeParts[1].trim()};
     }
 
+    /**
+     * Extracts the keyword used in the find command.
+     *
+     * @param inputParts split user input
+     * @return keyword to search
+     * @throws AthenaException if keyword is missing
+     */
     public String parseFindKeyword(String[] inputParts) throws AthenaException{
         if (inputParts.length < 2 || inputParts[1].trim().isEmpty()) {
             throw new AthenaException("Provide a keyword to search, you fool.");

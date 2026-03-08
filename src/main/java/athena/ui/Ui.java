@@ -3,7 +3,10 @@ package athena.ui;
 import athena.task.Task;
 import athena.task.TaskList;
 
-/** athena.ui.Ui prints output **/
+/**
+ * Ui handles all interactions with the user such as
+ * displaying messages and formatting output.
+ */
 
 public class Ui {
 

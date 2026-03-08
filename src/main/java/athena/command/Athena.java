@@ -1,8 +1,6 @@
 package athena.command;
-/** athena.command.Athena controls the command flow **/
 
 import java.util.Scanner;
-
 import athena.task.Deadline;
 import athena.task.Event;
 import athena.task.Task;
@@ -12,6 +10,15 @@ import athena.ui.Ui;
 import athena.data.Storage;
 import athena.parser.Parser;
 
+/**
+ * Athena is the main entry point of the chatbot application.
+ * <p>
+ * It coordinates interactions between the user interface, storage system,
+ * parser, and task list. Athena reads commands from the user, delegates
+ * parsing responsibilities to the {@link Parser}, performs operations on
+ * the {@link TaskList}, and displays results through the {@link Ui}.
+ * </p>
+ */
 public class Athena {
 
     private final Ui ui;
@@ -20,8 +27,15 @@ public class Athena {
     private final TaskList tasks;
     private final Parser parser;
 
-    /** Constructs an athena.command.Athena chatbot instance
-    Initialise the UI and input reader **/
+    /**
+     * Constructs a new Athena chatbot instance.
+     * <p>
+     * This constructor initializes the UI, input scanner, parser, and storage.
+     * It also attempts to load any previously saved tasks from storage.
+     * If loading fails, Athena starts with an empty task list and displays
+     * an error message to the user.
+     * </p>
+     */
     public Athena() {
         this.ui = new Ui();
         this.scanner = new Scanner(System.in);
@@ -39,6 +53,18 @@ public class Athena {
         this.tasks = loadedTasks;
     }
 
+    /**
+     * Processes a single command entered by the user.
+     * <p>
+     * The method delegates parsing responsibilities to the {@link Parser}
+     * to extract the command and its arguments. Depending on the command,
+     * it performs operations such as listing tasks, adding tasks, marking
+     * tasks as complete, deleting tasks, or searching tasks.
+     * </p>
+     *
+     * @param inputLine the full command entered by the user
+     * @throws AthenaException if the command is invalid or improperly formatted
+     */
     private void processCommand(String inputLine) throws AthenaException {
         String[] inputParts = parser.splitInput(inputLine);
         String command = parser.parseCommandWord(inputLine);
@@ -118,7 +144,16 @@ public class Athena {
         }
     }
 
-    /** run() CATCHES **/
+    /**
+     * Starts the main execution loop of the chatbot.
+     * <p>
+     * This method displays a greeting message and continuously reads user
+     * input from the console. Each command entered by the user is processed
+     * by {@link #processCommand(String)}. If an exception occurs during
+     * command execution, an error message is shown to the user and the
+     * program continues running.
+     * </p>
+     */
     public void run() {
         ui.showGreeting();
         while (true) {
@@ -135,7 +170,15 @@ public class Athena {
         }
     }
 
-    /** Program entry point **/
+    /**
+     * Program entry point for the Athena chatbot.
+     * <p>
+     * This method creates a new instance of Athena and starts the
+     * chatbot execution loop by calling {@link #run()}.
+     * </p>
+     *
+     * @param args command-line arguments (not used)
+     */
     public static void main(String[] args) {
         new Athena().run();
     }
