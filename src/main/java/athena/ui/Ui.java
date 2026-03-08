@@ -53,16 +53,31 @@ public class Ui {
         printLine();
         System.out.println("I have removed this task from your to-conquest list:");
         System.out.println(INDENT + task.toString());
-        System.out.println("You disappoint me. Now you have " + tasks.getSize() + " in the list.");
+        System.out.println("You disappoint me. Now you have " + tasks.getSize() + " tasks in the list.");
         printLine();
     }
 
-    /** Prints all the task elements in the task list **/
-    public void showTaskList(TaskList tasks) {
-        printLine();
+    /** Returns all the task elements in the task list **/
+    private void showTaskList(TaskList tasks) {
         for (int i = 0; i < tasks.getSize(); i++) {
-            System.out.println((i + 1) + ". " + tasks.getTaskUnsafe(i));
+            System.out.println(INDENT + (i + 1) + ". " + tasks.getTaskUnsafe(i));
         }
+    }
+
+    /** Prints all the task elements in the task list, with chatbot informing user these are the outputs for the list command **/
+    public void showTaskListWithPrompt(TaskList tasks) {
+        printLine();
+        System.out.println("Here are the tasks in your list:");
+        showTaskList(tasks);
+        printLine();
+    }
+
+    /** Prints all the task elements which contains the given keyword **/
+    public void showFoundTaskList(TaskList tasks) {
+        printLine();
+        System.out.println("Here are the matching tasks in your list:");
+        showTaskList(tasks);
+        System.out.println("Now you have " + tasks.getSize() + " matching tasks in your list.");
         printLine();
     }
 

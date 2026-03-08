@@ -75,7 +75,7 @@ public class Athena {
             return;
 
         case "list":
-            ui.showTaskList(tasks);
+            ui.showTaskListWithPrompt(tasks);
             return;
 
         case "mark": {
@@ -99,7 +99,7 @@ public class Athena {
         case "find": {
             String keyword = parser.parseFindKeyword(inputParts);
             TaskList matches = tasks.findTasks(keyword);
-            ui.showTaskList(matches);
+            ui.showFoundTaskList(matches);
             return;
         }
 

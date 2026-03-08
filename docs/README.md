@@ -84,9 +84,10 @@ Displays all tasks currently in your list. If your list is empty, Athena will le
 list
 ```
 ```
-1. [T][ ] borrow book
-2. [D][ ] return book (by: Sunday)
-3. [E][ ] book club meeting (from: Monday 2pm to: 4pm)
+Here are the tasks in your list:
+  1. [T][ ] borrow book
+  2. [D][ ] return book (by: Sunday)
+  3. [E][ ] book club meeting (from: Monday 2pm to: 4pm)
 ```
 
 ---
@@ -138,7 +139,7 @@ delete 1
 ```
 I have removed this task from your to-conquest list:
   [T][ ] borrow book
-You disappoint me. Now you have 2 in the list.
+You disappoint me. Now you have 2 tasks in the list.
 ```
 
 ---
@@ -154,8 +155,10 @@ Searches for tasks whose description contains the given keyword.
 find book
 ```
 ```
-1. [D][ ] return book (by: Sunday)
-2. [E][ ] book club meeting (from: Monday 2pm to: 4pm)
+Here are the matching tasks in your list:
+  1. [D][ ] return book (by: Sunday)
+  2. [E][ ] book club meeting (from: Monday 2pm to: 4pm)
+Now you have 2 matching tasks in your list.
 ```
 
 ---
