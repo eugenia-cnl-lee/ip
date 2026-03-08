@@ -41,12 +41,12 @@ public class Athena {
 
     private void processCommand(String inputLine) throws AthenaException {
         String[] inputParts = parser.splitInput(inputLine);
-        String command = parser.parseCommandWord(inputLine);
+        String command = inputParts[0].toLowerCase();
 
         switch (command) {
         case "bye":
             ui.showExit();
-            System.exit(0);
+            return;
 
         case "list":
             ui.showTaskList(tasks);
