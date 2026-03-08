@@ -1,6 +1,5 @@
 package athena.command;
 /** athena.command.Athena controls the command flow **/
-/** athena.command.Athena THROWS **/
 
 import java.util.Scanner;
 
@@ -11,7 +10,7 @@ import athena.task.TaskList;
 import athena.task.Todo;
 import athena.ui.Ui;
 import athena.data.Storage;
-import athena.command.AthenaException;
+import athena.parser.Parser;
 
 public class Athena {
 
@@ -19,6 +18,7 @@ public class Athena {
     private final Scanner scanner;
     private final Storage storage;
     private final TaskList tasks;
+    private final Parser parser;
 
     /** Constructs an athena.command.Athena chatbot instance
     Initialise the UI and input reader **/
@@ -26,6 +26,7 @@ public class Athena {
         this.ui = new Ui();
         this.scanner = new Scanner(System.in);
         this.storage = new Storage("data/athena.txt", "data");
+        this.parser = new Parser();
 
         TaskList loadedTasks;
         try {
@@ -38,35 +39,21 @@ public class Athena {
         this.tasks = loadedTasks;
     }
 
-    /** Error Handling:
-    parses index from user input **/
-    private static int parseIndex(String[] inputParts) throws AthenaException {
-        if (inputParts.length != 2 || inputParts[1].trim().isEmpty()) {
-            throw new AthenaException("Provide a task number, you fool.");
-        }
-        String s = inputParts[1].trim();
-        try {
-            return Integer.parseInt(s) - 1;
-        } catch (NumberFormatException e) {
-            throw new AthenaException("athena.task.Task number must be an integer, you fool.");
-        }
-    }
-
     private void processCommand(String inputLine) throws AthenaException {
-        String[] inputParts = inputLine.split(" ", 2);
-        String command = inputParts[0].toLowerCase();
+        String[] inputParts = parser.splitInput(inputLine);
+        String command = parser.parseCommandWord(inputLine);
 
         switch (command) {
         case "bye":
             ui.showExit();
-            System.exit(0); // or return via a boolean; see note below
+            System.exit(0);
 
         case "list":
             ui.showTaskList(tasks);
             return;
 
         case "mark": {
-            int idx = parseIndex(inputParts);
+            int idx = parser.parseIndex(inputParts);
             Task t = tasks.getTask(idx);
             t.markAsDone();
             storage.save(tasks);
@@ -75,7 +62,7 @@ public class Athena {
         }
 
         case "unmark": {
-            int idx = parseIndex(inputParts);
+            int idx = parser.parseIndex(inputParts);
             Task t = tasks.getTask(idx);
             t.markAsUndone();
             storage.save(tasks);
@@ -83,55 +70,41 @@ public class Athena {
             return;
         }
 
-        case "delete":
-            int idx = parseIndex(inputParts);
+        case "delete": {
+            int idx = parser.parseIndex(inputParts);
             Task t = tasks.getTask(idx);
             tasks.deleteTask(t);
+            storage.save(tasks);
             ui.showTaskDeleted(t, tasks);
             return;
+        }
 
-
-        case "todo":
-            if (inputParts.length < 2 || inputParts[1].trim().isEmpty()) {
-                throw new AthenaException("Provide a task description, you fool.");
-            }
-            Task todo = new Todo(inputParts[1].trim());
+        case "todo": {
+            String description = parser.parseTodoDescription(inputParts);
+            Task todo = new Todo(description);
             tasks.addTask(todo);
             storage.save(tasks);
             ui.showTaskAdded(todo, tasks);
             return;
+        }
 
-        case "deadline":
-            if (inputParts.length < 2 || inputParts[1].trim().isEmpty()) {
-                throw new AthenaException("Provide a task description and deadline, you fool.");
-            }
-            String[] deadlineParts = inputParts[1].split("by ", 2);
-            if (deadlineParts.length < 2 || deadlineParts[1].trim().isEmpty()) {
-                throw new AthenaException("Use the format: deadline <description> by <time>, you fool.");
-            }
-            Task deadline = new Deadline(deadlineParts[0].trim(), deadlineParts[1].trim());
+        case "deadline": {
+            String[] deadlineParts = parser.parseDeadlineParts(inputParts);
+            Task deadline = new Deadline(deadlineParts[0], deadlineParts[1]);
             tasks.addTask(deadline);
             storage.save(tasks);
             ui.showTaskAdded(deadline, tasks);
             return;
+        }
 
-        case "event":
-            if (inputParts.length < 2 || inputParts[1].trim().isEmpty()) {
-                throw new AthenaException("Provide a task description, start, and end time, you fool.");
-            }
-            String[] eventParts = inputParts[1].split("from ", 2);
-            if (eventParts.length < 2 || eventParts[1].trim().isEmpty()) {
-                throw new AthenaException("Use the format: event <description> from <start> to <end>, you fool.");
-            }
-            String[] timeParts = eventParts[1].split("to ", 2);
-            if (timeParts.length < 2 || timeParts[1].trim().isEmpty()) {
-                throw new AthenaException("Use the format: event <description> from <start> to <end>, you fool.");
-            }
-            Task event = new Event(eventParts[0].trim(), timeParts[0].trim(), timeParts[1].trim());
+        case "event": {
+            String[] eventParts = parser.parseEventParts(inputParts);
+            Task event = new Event(eventParts[0], eventParts[1], eventParts[2]);
             tasks.addTask(event);
             storage.save(tasks);
             ui.showTaskAdded(event, tasks);
             return;
+        }
 
         default:
             throw new AthenaException("You speak of nonsense, you fool.");
