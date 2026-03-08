@@ -11,7 +11,7 @@ public class Parser {
     /**
      * Parses the task index from the user's input.
      *
-     * @param inputParts array containing the split user input
+     * @param 'inputParts' array containing the split user input
      * @return the zero-based index of the task
      * @throws AthenaException if the task number is missing or not a valid integer
      */
