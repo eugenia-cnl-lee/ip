@@ -41,7 +41,7 @@ public class Athena {
 
     private void processCommand(String inputLine) throws AthenaException {
         String[] inputParts = parser.splitInput(inputLine);
-        String command = inputParts[0].toLowerCase();
+        String command = parser.parseCommandWord(inputLine);
 
         switch (command) {
         case "bye":
@@ -67,6 +67,13 @@ public class Athena {
             t.markAsUndone();
             storage.save(tasks);
             ui.showTaskMarkedAsUndone(t);
+            return;
+        }
+
+        case "find": {
+            String keyword = parser.parseFindKeyword(inputParts);
+            TaskList matches = tasks.findTasks(keyword);
+            ui.showTaskList(matches);
             return;
         }
 

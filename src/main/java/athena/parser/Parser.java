@@ -37,13 +37,11 @@ public class Parser {
         if (inputParts.length < 2 || inputParts[1].trim().isEmpty()) {
             throw new AthenaException("Provide a task description and deadline, you fool.");
         }
-
         String[] deadlineParts = inputParts[1].split("by ", 2);
         if (deadlineParts.length < 2 || deadlineParts[0].trim().isEmpty()
                 || deadlineParts[1].trim().isEmpty()) {
             throw new AthenaException("Use the format: deadline <description> by <time>, you fool.");
         }
-
         return new String[]{deadlineParts[0].trim(), deadlineParts[1].trim()};
     }
 
@@ -51,19 +49,23 @@ public class Parser {
         if (inputParts.length < 2 || inputParts[1].trim().isEmpty()) {
             throw new AthenaException("Provide a task description, start, and end time, you fool.");
         }
-
         String[] eventParts = inputParts[1].split("from ", 2);
         if (eventParts.length < 2 || eventParts[0].trim().isEmpty()
                 || eventParts[1].trim().isEmpty()) {
             throw new AthenaException("Use the format: event <description> from <start> to <end>, you fool.");
         }
-
         String[] timeParts = eventParts[1].split("to ", 2);
         if (timeParts.length < 2 || timeParts[0].trim().isEmpty()
                 || timeParts[1].trim().isEmpty()) {
             throw new AthenaException("Use the format: event <description> from <start> to <end>, you fool.");
         }
-
         return new String[]{eventParts[0].trim(), timeParts[0].trim(), timeParts[1].trim()};
+    }
+
+    public String parseFindKeyword(String[] inputParts) throws AthenaException{
+        if (inputParts.length < 2 || inputParts[1].trim().isEmpty()) {
+            throw new AthenaException("Provide a keyword to search, you fool.");
+        }
+        return inputParts[1].trim();
     }
 }

@@ -42,4 +42,15 @@ public class TaskList {
     public Task getTaskUnsafe(int index) {
         return tasks.get(index);
     }
+
+    /** Method for finding a task objecting from task list **/
+    public TaskList findTasks(String keyword) {
+        TaskList matches = new TaskList();
+        for (Task task : tasks) {
+            if (task.toString().toLowerCase().contains(keyword.toLowerCase())) {
+                matches.addTask(task);
+            }
+        }
+        return matches;
+    }
 }
